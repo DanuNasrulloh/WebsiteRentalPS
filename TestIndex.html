@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS Rental - Mainkan Game Favoritmu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary: #0ed145;
+            --secondary: #121212;
+            --accent: #1c1c1c;
+            --text-color: #f5f5f5;
+            --hover-color: #0be834;
+            --shadow-color: rgba(0, 255, 0, 0.5);
+            --review-bg: #2a2a2a;
+             --text-gradient: linear-gradient(45deg, #0ed145, #ffffff);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 4rem; /*Ruang untuk footer*/
+            position: relative; /*Posisi relatif untuk footer absolut*/
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: var(--accent);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+       .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 15px var(--hover-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 9999px;
+            background: var(--primary);
+            color: var(--text-color);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--hover-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: skewX(-45deg);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .nav-btn:hover::before {
+            left: 0;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+             text-align: center;
+            padding: 10rem 2rem 4rem;
+            background: linear-gradient(135deg, #1f1f1f, #121212);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+       .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('path_to_your_image.jpg') center/cover no-repeat fixed;
+             opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero > * {
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px var(--hover-color);
+            animation: glow 1.5s infinite alternate;
+            opacity: 0; /* Awalnya transparan */
+            animation: fadeIn 1.2s ease forwards; /* Animasi fade-in */
+           }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--hover-color);
+            }
+            to {
+                text-shadow: 0 0 20px var(--hover-color);
+            }
+        }
+
+        @keyframes fadeIn {
+           from {
+               opacity: 0;
+               transform: translateY(20px);
+           }
+           to{
+               opacity: 1;
+               transform: translateY(0);
+           }
+       }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            background: var(--primary);
+            color: var(--text-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px var(--shadow-color);
+             opacity: 0; /* Awalnya transparan */
+             animation: fadeIn 1.5s ease forwards 0.2s; /*Animasi fade-in*/
+
+        }
+
+        .cta-btn::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            width: 120%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(-45deg);
+            transition: all 0.5s ease;
+        }
+
+        .cta-btn:hover::before {
+            top: 0;
+        }
+
+        .cta-btn:hover {
+            background: var(--hover-color);
+            transform: translateY(-3px);
+        }
+
+         /* Review Section */
+        .review-section {
+            padding: 4rem 2rem;
+            text-align: center;
+             opacity: 0; /* Awalnya transparan */
+             animation: fadeIn 1.5s ease forwards 0.4s; /*Animasi fade-in*/
+        }
+        .review-section h2{
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+             transition: text-shadow 0.3s ease;
+
+        }
+
+        .review-section h2:hover{
+            text-shadow: 0 0 10px var(--hover-color);
+        }
+
+        .review-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .review-card {
+            background: var(--review-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            max-width: 300px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            opacity: 0; /* Awalnya transparan */
+            animation: fadeInUp 0.5s ease forwards; /*Animasi fade-in*/
+           }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeInUp{
+            from{
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to{
+                 opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .review-card h3 {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+         .review-card .rating {
+            color: gold;
+            margin-bottom: 1rem;
+        }
+
+        .review-card p {
+            font-style: italic;
+            color: #ddd;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background-color: var(--accent);
+            color: var(--text-color);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            font-size: 1.2rem;
+             opacity: 0; /* Awalnya transparan */
+             animation: fadeIn 1.5s ease forwards 0.6s; /*Animasi fade-in*/
+           }
+
+         .footer .highlight{
+             color: var(--primary);
+             transition: text-shadow 0.3s ease;
+
+           }
+         .footer .highlight:hover{
+             text-shadow: 0 0 10px var(--hover-color);
+           }
+
+
+        .highlight {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .review-section h2 {
+                font-size: 1.8rem;
+            }
+            .footer-text {
+                 font-size: 1rem;
+                }
+
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo" onclick="window.location.href='#'">PSgcrrr</div>
+        <div class="nav-links">
+            <button class="nav-btn">Produk</button>
+            <button class="nav-btn">Booking</button>
+            <button class="nav-btn">Pesanan</button>
+            <button class="nav-btn">About</button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Mainkan berbagai game favoritmu!</h1>
+        <a href="../HTML/Home.html">
+            <button class="cta-btn">
+                Lihat
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </a>
+    </div>
+
+    <!-- Section Ulasan -->
+     <section class="review-section">
+        <h2>Apa Kata Mereka?</h2>
+        <div class="review-container" id="reviewContainer">
+        </div>
+    </section>
+
+    <!--Footer-->
+    <footer class="footer">
+        Nikmati pengalaman <span class="highlight">bermain</span> game bersama <span class="highlight">Kami</span>
+    </footer>
+
+    <script>
+        // Data dummy ulasan (bisa diganti dengan data dari server/database)
+        const reviews = [
+            {
+                name: "Fahmi Ardiansyah",
+                rating: 5,
+                comment: "Pelayanannya ramah, banyak pilihan game baru, mantap!",
+            },
+            {
+                name: "Jafar Shodiq",
+                rating: 4,
+                comment: "Sangat menyenangkan bermain disini, next time pasti balik lagi",
+            },
+            {
+                 name: "Ahmad Fadloli",
+                 rating: 4.5,
+                comment: "Tempatnya bersih dan nyaman untuk bermain, rekomended sekali!",
+            },
+             {
+                name: "Rifqi Afandi",
+                rating: 5,
+                comment: "Pengalaman bermain game jadi lebih seru dengan kualitas perangkat yang bagus.",
+            },
+        ];
+
+        function generateStarRating(rating){
+           const fullStars = Math.floor(rating);
+           const halfStar = rating % 1 !== 0;
+           let stars = '';
+
+           for(let i = 0; i < fullStars; i++){
+            stars += '<i class="fas fa-star"></i>';
+           }
+           if(halfStar){
+            stars += '<i class="fas fa-star-half-alt"></i>';
+           }
+           const emptyStars = 5 - Math.ceil(rating);
+            for(let i = 0; i < emptyStars; i++){
+            stars += '<i class="far fa-star"></i>';
+           }
+           return stars;
+        }
+
+        // Fungsi untuk menampilkan ulasan
+        function displayReviews() {
+            const reviewContainer = document.getElementById('reviewContainer');
+            reviewContainer.innerHTML = ""; // Bersihkan kontainer sebelum menambahkan ulasan baru
+            reviews.forEach((review, index) => {
+                const reviewCard = document.createElement('div');
+                reviewCard.classList.add('review-card');
+                // Menambahkan delay animasi untuk setiap card
+                reviewCard.style.animationDelay = `${0.15 * index}s`;
+
+                reviewCard.innerHTML = `
+                <h3>${review.name}</h3>
+                <div class="rating">${generateStarRating(review.rating)}</div>
+                <p>"${review.comment}"</p>
+                `;
+                reviewContainer.appendChild(reviewCard);
+            });
+        }
+
+        // Panggil fungsi untuk menampilkan ulasan saat halaman dimuat
+        displayReviews();
+    </script>
+</body>
+</html>
